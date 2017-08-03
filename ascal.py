@@ -102,7 +102,7 @@ def parse(tokens):
 
     def parse_integer(tokens):
         try:
-            return ["int", int(tokens[0])], tokens[1:]
+            return ["int", int(tokens[0]), None], tokens[1:]
         except ValueError:
             raise Exception("Parse error: parser except integer, but there is no token")
 
@@ -114,28 +114,52 @@ def parse(tokens):
             return parse_expression(tokens)
 
     def parse_exp1(tokens):
-        tree1, rest = parse_exp(tokens)
-        token = rest[0]
-        if token is "**":
-            op = token
-        tree2, rest = parse_exp(rest[1:])
-        return [op, tree1, tree2], rest
+        stree, rest = parse_exp(tokens)
+        if rest:
+            token = rest[0]
+        else:
+            return stree, rest
+        while token is "**":
+            tree, rest = parse_exp(rest[1:])
+            stree = [token, stree, tree]
+            if not rest:
+                break
+            else:
+                token = rest[0]
+
+        return stree, rest
 
     def parse_exp2(tokens):
-        tree1, rest = parse_exp1(tokens)
-        token = rest[0]
-        if token is "*" or token is "/":
-            op = token
-        tree2, rest = parse_exp1(rest[1:])
-        return [op, tree1, tree2], rest
+        stree, rest = parse_exp1(tokens)
+        if rest:
+            token = rest[0]
+        else:
+            return stree, rest
+        while token is "*" or token is "/":
+            tree, rest = parse_exp1(rest[1:])
+            stree = [token, stree, tree]
+            if not rest:
+                break
+            else:
+                token = rest[0]
+
+        return stree, rest
 
     def parse_exp3(tokens):
-        tree1, rest = parse_exp2(tokens)
-        token = rest[0]
-        if token is "+" or token is "-":
-            op = token
-        tree2, rest = parse_exp2(rest[1:])
-        return [op, tree1, tree2], rest
+        stree, rest = parse_exp2(tokens)
+        if rest:
+            token = rest[0]
+        else:
+            return stree, rest
+        while token is "+" or token is "-":
+            tree, rest = parse_exp2(rest[1:])
+            stree = [token, stree, tree]
+            if not rest:
+                break
+            else:
+                token = rest[0]
+
+        return stree, rest
 
     def parse_expression(tokens):
         return parse_exp3(tokens)
