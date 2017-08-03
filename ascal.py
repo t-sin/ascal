@@ -1,5 +1,8 @@
 """
 Ascal is an associative calculator.
+
+## goals
+
 It's just a toy calculator program with simple operation. This project's goal
  is, understanding how to parse the grammer such that:
 
@@ -18,6 +21,15 @@ There I think simple languages that has characterisities above. Concretely,
 
 and integer operands (interpreter may prints float number as result, but user
 can not input float but integer).
+
+## formal grammer
+
+<expression> ::= <integer> | (<expression>) | <expression> <op> <expression>
+<integer> ::= <num> | <num>*
+
+<num> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+<op> ::= + | - | * | /
+<space> ::= ` `
 """
 
 from io import StringIO
