@@ -22,38 +22,30 @@ can not input float but integer).
 
 from io import StringIO
 
-def _read_integer(s):
-    int_token = StringIO()
-    tail_pos = 0
-    for i in range(len(s)):
-        if s[i] in "0123456789":
-            int_token.write(s[i])
-            tail_pos = i
-        else:
-            break
-
-    token = int_token.getvalue()
-    if token is "":
-        return None, s
-    else:
-        return token, s[i:]
-
-OPERATOR_CHARS = "+-*/"
-
-def _read_operator(s):
+def _read_token(chars, s):
     sio = StringIO()
     tail_pos = 0
     for i in range(len(s)):
-        if s[i] in OPERATOR_CHARS:
+        if s[i] in chars:
             sio.write(s[i])
             tail_pos = i
         else:
             break
+
     token = sio.getvalue()
     if token is "":
         return None, s
     else:
-        return token, s[i:]
+        return token, s[tail_pos+1:]
+
+INTEGER_CHARS = "0123456789"
+def _read_integer(s):
+    return _read_token(INTEGER_CHARS, s)
+
+OPERATOR_CHARS = "+-*/"
+def _read_operator(s):
+    return _read_token(OPERATOR_CHARS, s)
+
 
 def tokenize(s):
     return []
