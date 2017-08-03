@@ -51,6 +51,7 @@ def _read_parenthesis(s):
     return _read_token(PARENTHESIS_CHARS, s)
 
 WHITESPACE_CHARS = " "
+
 def tokenize(s):
     tokens = []
     str = s
