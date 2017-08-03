@@ -26,7 +26,11 @@ can not input float but integer).
 
 ### nonterminal symbols
 
-<expression> ::= <integer> | (<expression>) | <expression> <op> <expression>
+<expression> ::= <exp3>
+<exp3> ::= <exp2> | <exp2> + <exp2> | <exp2> - <exp2>
+<exp2> ::= <exp1> | <exp1> * <exp1> | <exp1> / <exp1>
+<exp1> ::= <exp> | <exp> ** <exp>
+<exp> ::= <integer> | <expression>
 
 ### terminal symbols
 
@@ -35,7 +39,7 @@ can not input float but integer).
 ### alphabets
 
 <num> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-<op> ::= + | - | * | /
+<op> ::= + | - | * | / | **
 <space> ::= ` `
 """
 
