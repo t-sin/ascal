@@ -14,6 +14,7 @@ There I think simple languages that has characterisities above. Concretely,
     - multiply `*` and division `/`, high priority operations
 - right associative operations
     - exponential `**`,
+- association order changing by parenthesis `(`, `)`
 
 and integer operands (interpreter may prints float number as result, but user
 can not input float but integer).
