@@ -1,5 +1,5 @@
 """
-Ascal is an associative calculator.
+Ascal is an toy calculator.
 
 ## goals
 
