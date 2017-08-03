@@ -38,6 +38,23 @@ def _read_integer(s):
     else:
         return token, s[i:]
 
+OPERATOR_CHARS = "+-*/"
+
+def _read_operator(s):
+    sio = StringIO()
+    tail_pos = 0
+    for i in range(len(s)):
+        if s[i] in OPERATOR_CHARS:
+            sio.write(s[i])
+            tail_pos = i
+        else:
+            break
+    token = sio.getvalue()
+    if token is "":
+        return None, s
+    else:
+        return token, s[i:]
+
 def tokenize(s):
     return []
 
