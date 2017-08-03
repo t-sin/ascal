@@ -19,6 +19,24 @@ and integer operands (interpreter may prints float number as result, but user
 can not input float but integer).
 """
 
+from io import StringIO
+
+def _read_integer(s):
+    int_token = StringIO()
+    tail_pos = 0
+    for i in range(len(s)):
+        if s[i] in "0123456789":
+            int_token.write(s[i])
+            tail_pos = i
+        else:
+            break
+
+    token = int_token.getvalue()
+    if token is "":
+        return None, s
+    else:
+        return token, s[i:]
+
 def tokenize(s):
     return []
 
