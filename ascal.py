@@ -64,7 +64,7 @@ def tokenize(s):
         elif ch in PARENTHESIS_CHARS:
             token, rest = _read_parenthesis(str)
         elif ch in WHITESPACE_CHARS:
-            rest = str[1:]
+            token, rest = None, str[1:]
         else:
             raise Exception("Unexpected char: '{}'".format(ch))
         if token:
