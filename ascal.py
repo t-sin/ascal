@@ -53,23 +53,23 @@ def _read_parenthesis(s):
 WHITESPACE_CHARS = " "
 def tokenize(s):
     tokens = []
-    s = s
+    str = s
 
-    while s is not "":
-        ch = s[0]
+    while str is not "":
+        ch = str[0]
         if ch in INTEGER_CHARS:
-            token, rest = _read_integer(s)
+            token, rest = _read_integer(str)
         elif ch in OPERATOR_CHARS:
-            token, rest = _read_operator(s)
+            token, rest = _read_operator(str)
         elif ch in PARENTHESIS_CHARS:
-            token, rest = _read_parenthesis(s)
+            token, rest = _read_parenthesis(str)
         elif ch in WHITESPACE_CHARS:
-            s = s[1:]
+            rest = str[1:]
         else:
             raise Exception("Unexpected char: '{}'".format(ch))
         if token:
             tokens.append(token)
-        s = rest
+        str = rest
 
     return tokens
 
