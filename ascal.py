@@ -90,7 +90,7 @@ def tokenize(s):
         elif ch in WHITESPACE_CHARS:
             token, rest = None, str[1:]
         else:
-            raise Exception("Unexpected char: '{}'".format(ch))
+            raise Exception("Tokenize error: Unexpected char '{}'".format(ch))
         if token:
             tokens.append(token)
         str = rest
