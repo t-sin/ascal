@@ -98,7 +98,50 @@ def tokenize(s):
     return tokens
 
 def parse(tokens):
-    return []
+    """Parse tokens with recursive descent parsing"""
+
+    def parse_integer(tokens):
+        try:
+            return ["int", int(tokens[0])], tokens[1:]
+        except ValueError:
+            raise Exception("Parse error: parser except integer, but there is no token")
+
+    def parse_exp(tokens):
+        token = tokens[0]
+        if token.isdigit():
+            return parse_integer(tokens)
+        else:
+            return parse_expression(tokens)
+
+    def parse_exp1(tokens):
+        tree1, rest = parse_exp(tokens)
+        token = rest[0]
+        if token is "**":
+            op = token
+        tree2, rest = parse_exp(rest[1:])
+        return [op, tree1, tree2], rest
+
+    def parse_exp2(tokens):
+        tree1, rest = parse_exp1(tokens)
+        token = rest[0]
+        if token is "*" or token is "/":
+            op = token
+        tree2, rest = parse_exp1(rest[1:])
+        return [op, tree1, tree2], rest
+
+    def parse_exp3(tokens):
+        tree1, rest = parse_exp2(tokens)
+        token = rest[0]
+        if token is "+" or token is "-":
+            op = token
+        tree2, rest = parse_exp2(rest[1:])
+        return [op, tree1, tree2], rest
+
+    def parse_expression(tokens):
+        return parse_exp3(tokens)
+
+    stree = parse_expression(tokens)
+    return stree
 
 if __name__ == "__main__":
     print("Hi!")
