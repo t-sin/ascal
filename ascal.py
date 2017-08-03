@@ -50,8 +50,28 @@ PARENTHESIS_CHARS = "()"
 def _read_parenthesis(s):
     return _read_token(PARENTHESIS_CHARS, s)
 
+WHITESPACE_CHARS = " "
 def tokenize(s):
-    return []
+    tokens = []
+    s = s
+
+    while s is not "":
+        ch = s[0]
+        if ch in INTEGER_CHARS:
+            token, rest = _read_integer(s)
+        elif ch in OPERATOR_CHARS:
+            token, rest = _read_operator(s)
+        elif ch in PARENTHESIS_CHARS:
+            token, rest = _read_parenthesis(s)
+        elif ch in WHITESPACE_CHARS:
+            s = s[1:]
+        else:
+            raise Exception("Unexpected char: '{}'".format(ch))
+        if token:
+            tokens.append(token)
+        s = rest
+
+    return tokens
 
 def parse(tokens):
     return []
