@@ -46,6 +46,9 @@ OPERATOR_CHARS = "+-*/"
 def _read_operator(s):
     return _read_token(OPERATOR_CHARS, s)
 
+PARENTHESIS_CHARS = "()"
+def _read_parenthesis(s):
+    return _read_token(PARENTHESIS_CHARS, s)
 
 def tokenize(s):
     return []
