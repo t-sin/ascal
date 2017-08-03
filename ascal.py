@@ -24,8 +24,15 @@ can not input float but integer).
 
 ## formal grammer
 
+### nonterminal symbols
+
 <expression> ::= <integer> | (<expression>) | <expression> <op> <expression>
+
+### terminal symbols
+
 <integer> ::= <num> | <num>*
+
+### alphabets
 
 <num> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 <op> ::= + | - | * | /
