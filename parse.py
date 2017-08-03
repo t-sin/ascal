@@ -168,4 +168,5 @@ def parse(tokens):
     return stree
 
 if __name__ == "__main__":
-    print("Hi!")
+    while True:
+        print(parse(tokenize(input("?> "))))
