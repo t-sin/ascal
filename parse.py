@@ -102,7 +102,7 @@ def parse(tokens):
 
     def parse_integer(tokens):
         try:
-            return ["int", int(tokens[0]), None], tokens[1:]
+            return int(tokens[0]), tokens[1:]
         except ValueError:
             raise Exception("Parse error: parser except integer, but there is no token")
 
