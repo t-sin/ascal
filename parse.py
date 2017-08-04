@@ -119,7 +119,7 @@ def parse(tokens):
             token = rest[0]
         else:
             return stree, rest
-        while token is "**":
+        while token == "**":
             tree, rest = parse_exp(rest[1:])
             stree = [token, stree, tree]
             if not rest:
@@ -135,7 +135,7 @@ def parse(tokens):
             token = rest[0]
         else:
             return stree, rest
-        while token is "*" or token is "/":
+        while token == "*" or token == "/":
             tree, rest = parse_exp1(rest[1:])
             stree = [token, stree, tree]
             if not rest:
@@ -151,7 +151,7 @@ def parse(tokens):
             token = rest[0]
         else:
             return stree, rest
-        while token is "+" or token is "-":
+        while token == "+" or token == "-":
             tree, rest = parse_exp2(rest[1:])
             stree = [token, stree, tree]
             if not rest:
